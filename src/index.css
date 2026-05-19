@@ -1,0 +1,294 @@
+/* ════════════════════════════════════════════════════════════
+   DESIGN TOKENS — Inspirés de la PDP de Yunari
+   ════════════════════════════════════════════════════════════ */
+:root {
+  --rose-mist: #fddce5;
+  --rose-cream: #ffe8ee;
+  --sky-soft: #d8e9ff;
+  --sky-primary: #a8d8ff;
+  --sky-vivid: #6fb9f5;
+  --lavender: #e5dcff;
+
+  --navy: #0e1b33;
+  --navy-soft: #1c2b4d;
+  --slate: #4a5876;
+  --slate-soft: #7a87a8;
+
+  --paper: #faf6f2;
+  --paper-warm: #fff8f1;
+  --cream: #fffbf6;
+
+  --accent: #5b9fe8;
+  --accent-rose: #f5a8c0;
+
+  --display: 'Fraunces', 'Times New Roman', serif;
+  --body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --container: min(1280px, 92vw);
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--body);
+  font-weight: 400;
+  color: var(--navy);
+  background: var(--paper);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none;
+}
+
+@media (max-width: 900px), (hover: none) {
+  body {
+    cursor: auto;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a,
+  button {
+    cursor: none;
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--sky-primary);
+  color: var(--navy);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sky-primary);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* CURSEUR PERSO */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s, height 0.25s, background 0.25s, border-color 0.25s;
+}
+
+.cursor-ring.hover {
+  width: 64px;
+  height: 64px;
+  background: rgba(168, 216, 255, 0.2);
+  border-color: var(--sky-primary);
+}
+
+@media (max-width: 900px), (hover: none) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* PROGRESS BAR SCROLL */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--sky-vivid), var(--accent-rose));
+  z-index: 9998;
+  transform-origin: left;
+}
+
+/* ATMOSPHERE */
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 10%, var(--rose-mist) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 90% 30%, var(--sky-soft) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 80%, var(--lavender) 0%, transparent 55%),
+    var(--paper);
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.05 0 0 0 0 0.2 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* SECTIONS GENERIQUES */
+section {
+  padding: 7rem 0;
+  position: relative;
+}
+
+.container {
+  width: var(--container);
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.section-eyebrow::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(2rem, 4.5vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  max-width: 800px;
+  margin-bottom: 1.25rem;
+  font-variation-settings: 'opsz' 144;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.section-sub {
+  font-size: 1.1rem;
+  color: var(--slate);
+  max-width: 620px;
+  line-height: 1.7;
+  margin-bottom: 4rem;
+}
+
+/* BOUTONS */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.75rem;
+  background: var(--navy);
+  color: var(--cream);
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-rose) 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: -1;
+}
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.75rem;
+  color: var(--navy);
+  border: 1.5px solid rgba(14, 27, 51, 0.15);
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+}
+.btn-ghost:hover {
+  background: var(--navy);
+  color: var(--cream);
+  border-color: var(--navy);
+}
+
+code.inline {
+  font-family: var(--mono);
+  background: rgba(168, 216, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.85em;
+}
